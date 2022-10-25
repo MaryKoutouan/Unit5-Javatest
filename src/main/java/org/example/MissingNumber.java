@@ -2,19 +2,21 @@ package org.example;
 
 
 import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class MissingNumber {
-    public static int missingNumber(int[] listNumbers, int maxNum) {
+    public static int missingNumberSort(int[] nums, int maxNum) {
+        Arrays.sort(nums);
 
-        Set<Integer> set = Arrays.stream(listNumbers).boxed().collect(Collectors.toSet());
-
-        for (int i = 1; i <= maxNum; i += 1) {
-            if (!set.contains(i)) {
+        for (int i = 1; i < maxNum; i += 1) {
+            if (i != nums[i - 1]) {
                 return i;
             }
         }
-        return 0;
+
+        if (nums.length == maxNum && nums[maxNum - 1] == maxNum) {
+            return 0;
+        }
+
+        return maxNum;
     }
 }
